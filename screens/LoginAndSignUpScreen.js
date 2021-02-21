@@ -1,5 +1,7 @@
 import React from 'react';
 import {View, Text, TextInput, StyleSheet, Image} from 'react-native';
+import db from '../config';
+import firebase from 'firebase';
 
 export default class LoginAndSignUpScreen extends React.Component{
     constructor() {
@@ -9,9 +11,11 @@ export default class LoginAndSignUpScreen extends React.Component{
             password: ''
         }
     }
+
     render() {
         return(
                 <View style = {styles.container}>
+
                     <Text style = {{fontSize: 30, fontWeight: '800', marginLeft: 55, marginTop: 30,}}>Barter System App</Text>
                     <Image 
                         style={{width: 230, height: 200, margin : 20, marginLeft: 60}} 
@@ -41,6 +45,18 @@ export default class LoginAndSignUpScreen extends React.Component{
                             }}
                         />
                     </View>
+                    <View>
+                        <TouchableOpacity
+                            style = {styles.button}
+                            onPress = {()=>{this.userLogin(this.state.emailId, this.state.password)}}>
+                            <Text style = {styles.buttonText}>Login</Text> 
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style = {styles.button}
+                            onPress = {()=>{this.userSignUp(this.state.emailId, this.state.password)}}>
+                            <Text style = {styles.buttonText}>Sign Up</Text> 
+                        </TouchableOpacity>
+                    </View>
                 </View>
         )
     }
@@ -59,5 +75,26 @@ const styles = StyleSheet.create({
         borderWidth:1,
         marginTop:20,
         padding:10,
-    }
+    },
+    button:{
+        width:300,
+        height:50,
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:25,
+        backgroundColor: '#ff9800',
+        shadowColor:'#000',
+        shadowOffset: {
+            width:0,
+            height:8
+        },
+        shadowOpacity:0.30,
+        shadowRadius:10,
+        elevation:16
+    },
+    buttonText:{
+        color:'#fff',
+        fontWeight:'200',
+        fontSize:20,
+    },
 })
